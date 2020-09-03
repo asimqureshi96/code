@@ -1,0 +1,218 @@
+@import 'variables';
+@import 'mixins';
+
+// Hide desktop view
+.cd-schedule-desktop {
+  display: none;
+}
+
+// Switch to desktop on medium or large device
+@include media-breakpoint-up(md) {
+  .cd-schedule-desktop {
+    display: block;
+  }
+
+  .cd-schedule-mobile {
+    display: none;
+  }
+}
+
+// Common styles
+.cd-schedule {
+  a {
+    color: $seminar-text;
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+  }
+
+  ul {
+    display: block;
+    list-style: none;
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  li {
+    background-color: $seminar-event-bg;
+  }
+
+  .event-card {
+  }
+
+  .event-time {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+
+  .event-name {
+    font-size: 1.25rem;
+    font-weight: normal;
+    line-height: 120%;
+    margin-bottom: 0.8rem;
+  }
+
+  .event-booker-attending {
+    i {
+      color: $seminar-booker-attending;
+    }
+  }
+}
+
+// Mobile only styles
+.cd-schedule-mobile {
+  ul {
+    padding: 0;
+  }
+
+  .event-card {
+    border: 1px solid $seminar-border;
+    border-left: 6px solid;
+  }
+}
+
+// Desktop only styles
+.cd-schedule-desktop {
+  margin: 2em 0 2em 2em;
+  position: relative;
+  width: calc(100% - 50px);
+
+  a {
+    min-height: inherit;
+  }
+
+  .timeline {
+    display: block;
+    height: 100%;
+    left: 0;
+    padding-top: $scheduleRowHeight;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    li {
+      height: $scheduleRowHeight;
+      position: relative;
+
+      &::after {
+        /* this is used to create the table horizontal lines */
+        background: $seminar-timeline-border;
+        bottom: 0;
+        content: '';
+        height: 1px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+      }
+    }
+
+    span {
+      display: inline-block;
+      position: relative;
+      right: 56px;
+      transform: translateY(-50%);
+    }
+  }
+
+  .events {
+    float: left;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    @include column-count-x;
+  }
+
+  .events-group {
+    border: 1px solid $seminar-border;
+    float: left;
+    margin-bottom: 0;
+
+    > ul {
+      margin: 0 3px;
+      overflow: visible;
+      padding: 0;
+      position: relative;
+    }
+  }
+
+  .event-location {
+    border-bottom: 0;
+    display: table;
+    height: $scheduleRowHeight;
+    padding: 0 5%;
+    width: 100%;
+
+    span {
+      display: table-cell;
+      font-size: 1rem;
+      font-weight: normal;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+
+  .event-card {
+    background-color: $seminar-bg;
+    border: 0;
+    border-left: 6px solid;
+    box-shadow: none;
+    flex-shrink: 1;
+    float: left;
+    height: auto;
+    left: 8px;
+    margin-right: 0;
+    overflow: hidden;
+    position: absolute;
+    transition: all 400ms ease-in-out;
+    width: calc(100% - 16px);
+    z-index: 3;
+
+    .fa-expand {
+      transition: opacity 400ms ease-in-out;
+    }
+
+    &:hover {
+      box-shadow: 0px 4px 12px 2px rgba(0, 0, 0, 0.2);
+      max-height: 1000px !important;
+      z-index: 10;
+
+      .event-details {
+        opacity: 1;
+      }
+
+      .fa-expand {
+        opacity: 0;
+      }
+    }
+  }
+
+  .event-speakers, .event-colleagues-attending {
+    ul {
+      margin-bottom: 0;
+      padding-top: 0;
+    }
+
+    li {
+      background-color: inherit;
+      list-style: circle;
+    }
+  }
+
+  .vat {
+    font-size: 0.6rem;
+  }
+
+  .event-details {
+    margin-top: 1em;
+    opacity: 0;
+    transition: opacity 400ms ease-in-out;
+  }
+
+  .event-cost {
+    margin-bottom: 1em;
+  }
+
+  @include timeline-count-x($scheduleRowHeight);
+}

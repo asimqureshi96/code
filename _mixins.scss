@@ -1,0 +1,15 @@
+@mixin column-count-x {
+  @for $i from 1 through 10 {
+    .column-count-#{$i} {
+      width: (100% / $i);
+    }
+  }
+}
+
+@mixin timeline-count-x($scheduleRowHeight) {
+  @for $i from 1 through 24 {
+    .timeline-count-#{$i} {
+      height: ($scheduleRowHeight * $i);
+    }
+  }
+}
